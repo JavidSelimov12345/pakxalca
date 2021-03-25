@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="ad.size" content="width=300,height=600">
+<title></title>
+
+<script src="easeljs-0.6.0.min.js"></script>
+<script src="tweenjs-0.4.0.min.js"></script>
+<script src="movieclip-0.6.0.min.js"></script>
+<script src="preloadjs-0.3.0.min.js"></script>
+<script src="300x600.js"></script>
+
+<script type="text/javascript">
+var clickTag = "http://pakxalca.az/"; </script>
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var manifest = [
+		{src:"images/_1.png", id:"_1"},
+		{src:"images/_2.png", id:"_2"},
+		{src:"images/_3.png", id:"_3"},
+		{src:"images/_4.png", id:"_4"},
+		{src:"images/_5.png", id:"_5"},
+		{src:"images/_6.png", id:"_6"}
+	];
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib._300x600();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(24);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+</style>
+</head>
+
+<body onLoad="init();" style="background-color:#D4D4D4">
+<a href="javascript:window.open(window.clickTag)"><canvas id="canvas" width="300" height="600" style="background-color:#ffffff"></canvas></a>
+</body>
+</html>
