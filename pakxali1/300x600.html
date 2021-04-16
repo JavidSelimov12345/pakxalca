@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="ad.size" content="width=300,height=600">
+<title></title>
+
+<script src="easeljs-0.6.0.min.js"></script>
+<script src="tweenjs-0.4.0.min.js"></script>
+<script src="movieclip-0.6.0.min.js"></script>
+<script src="preloadjs-0.3.0.min.js"></script>
+<script src="300x600.js"></script>
+
+<script type="text/javascript">
+var clickTag = "http://pakxalca.az/"; </script>
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var manifest = [
+		{src:"images/d.png", id:"d"},
+		{src:"images/m1.png", id:"m1"},
+		{src:"images/m2.png", id:"m2"},
+		{src:"images/m3.png", id:"m3"},
+		{src:"images/m4.png", id:"m4"},
+		{src:"images/m5.png", id:"m5"},
+		{src:"images/m6.png", id:"m6"},
+		{src:"images/m7.png", id:"m7"},
+		{src:"images/m8.png", id:"m8"},
+		{src:"images/p1.png", id:"p1"},
+		{src:"images/p2.png", id:"p2"},
+		{src:"images/x1.jpg", id:"x1"},
+		{src:"images/x2.png", id:"x2"},
+		{src:"images/x3.png", id:"x3"},
+		{src:"images/x4.png", id:"x4"},
+		{src:"images/x5.png", id:"x5"}
+	];
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib._300x600();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(30);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+<meta charset="UTF-8">
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+</style>
+</head>
+
+<body onLoad="init();" style="background-color:#D4D4D4">
+<a href="javascript:window.open(window.clickTag)"><canvas id="canvas" width="300" height="600" style="background-color:#ffffff"></canvas></a>
+</body>
+</html>
